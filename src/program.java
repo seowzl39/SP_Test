@@ -1,6 +1,12 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Program {
+	
+	static Map<Character,ArrayList<String>> keypad = new HashMap<Character,ArrayList<String>>();
 
 	public static void main(String[] args) {
 		
@@ -21,7 +27,15 @@ public class Program {
 			System.out.println("Output: " + NumPressedResult);
 			
 		} else {		
-		
+			initializeKeypadInHashMap();
+			char[] inputChar = input.toCharArray();
+			
+			//question 3
+			if (inputChar.length == 2) {
+			ArrayList<String> RecommendWordResult = RecommendWord(inputChar);
+			System.out.println("Output: " + RecommendWordResult);
+			}
+				
 		}
 
 	}
@@ -76,6 +90,36 @@ public class Program {
 		}
 		return -1;
 		
+	}
+	
+	private static ArrayList<String> RecommendWord(char[] inputChar) {
+		
+		ArrayList<String> result = new ArrayList<String>();
+		for (int i=0; i<inputChar.length;i++)
+		{
+			ArrayList<String> a = keypad.get(inputChar[i]);
+			for (int j=i+1; j<inputChar.length;j++) {
+				ArrayList<String> b = keypad.get(inputChar[j]);
+				for (String resultFirst : a) {
+					for (String resultSecond : b) {
+						result.add(resultFirst + resultSecond);
+					}
+				}
+			}
+				
+		}
+		return result;
+	}
+
+	private static void initializeKeypadInHashMap() {
+		keypad.put('2', new ArrayList<String>(Arrays.asList("a","b","c")));
+		keypad.put('3', new ArrayList<String>(Arrays.asList("d","e","f")));
+		keypad.put('4', new ArrayList<String>(Arrays.asList("g","h","i")));
+		keypad.put('5', new ArrayList<String>(Arrays.asList("j","k","l")));
+		keypad.put('6', new ArrayList<String>(Arrays.asList("m","n","o")));
+		keypad.put('7', new ArrayList<String>(Arrays.asList("p","q","r","s")));
+		keypad.put('8', new ArrayList<String>(Arrays.asList("t","u","v")));
+		keypad.put('9', new ArrayList<String>(Arrays.asList("w","x","y","z")));
 	}
 
 }
