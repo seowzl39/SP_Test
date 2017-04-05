@@ -19,11 +19,11 @@ public class Program {
 			char[] inputChar = input.toCharArray();
 			
 			//question 1
-			String KeyPressedResult = TotalNumOfKeyPressed(inputChar);
+			int KeyPressedResult = TotalNumOfKeyPressed(inputChar);
 			System.out.println("Output: " + KeyPressedResult);			
 			
 			//question 2
-			String NumPressedResult = TotalNumPressed(inputChar);
+			String NumPressedResult = NumPressed(inputChar);
 			System.out.println("Output: " + NumPressedResult);
 			
 		} else {		
@@ -31,9 +31,9 @@ public class Program {
 			char[] inputChar = input.toCharArray();
 			
 			//question 3
-			if (inputChar.length == 2) {
-			ArrayList<String> RecommendWordResult = RecommendWord(inputChar);
-			System.out.println("Output: " + RecommendWordResult);
+			if(inputChar.length == 2) {
+				ArrayList<String> RecommendWordResult = RecommendWord(inputChar);
+				System.out.println("Output: " + RecommendWordResult);
 			}
 				
 		}
@@ -53,12 +53,31 @@ public class Program {
 		return true;					
 	}
 	
-	private static String TotalNumOfKeyPressed(char[] inputChar) {
-		// TODO Auto-generated method stub
-		return null;
+	private static int TotalNumOfKeyPressed(char[] inputChar) {
+		 
+		ArrayList<Character> one = new ArrayList<Character>(Arrays.asList('a','d','g','j','m','p','t','w'));
+		ArrayList<Character> two = new ArrayList<Character>(Arrays.asList('b','e','h','k','n','q','u','x'));
+		ArrayList<Character> three = new ArrayList<Character>(Arrays.asList('c','f','i','l','o','r','v','y'));
+		ArrayList<Character> four = new ArrayList<Character>(Arrays.asList('s','z'));
+		int count = 0;
+		
+		for (char eachChar : inputChar)
+		{
+			if (one.indexOf(eachChar)!=-1)
+				count +=1;
+			else if (two.indexOf(eachChar)!=-1)	
+				count +=2;
+			else if (three.indexOf(eachChar)!=-1)	
+				count +=3;
+			else if (four.indexOf(eachChar)!=-1)	
+				count +=4;
+				
+		}
+	
+		return count;
 	}
 	
-	private static String TotalNumPressed(char[] inputChar) {
+	private static String NumPressed(char[] inputChar) {
 		
 		String result = "";
 		
@@ -112,6 +131,8 @@ public class Program {
 	}
 
 	private static void initializeKeypadInHashMap() {
+		keypad.put('0', new ArrayList<String>(Arrays.asList("")));
+		keypad.put('1', new ArrayList<String>(Arrays.asList("")));
 		keypad.put('2', new ArrayList<String>(Arrays.asList("a","b","c")));
 		keypad.put('3', new ArrayList<String>(Arrays.asList("d","e","f")));
 		keypad.put('4', new ArrayList<String>(Arrays.asList("g","h","i")));
